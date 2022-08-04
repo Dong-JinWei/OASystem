@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--     1. 配置注解扫描 -->
+    <mvc:annotation-driven/>
+
+    <!--     2. 注解需要扫描的包 -->
+    <context:component-scan base-package="com.tedu.controller"/>
+
+    <!--      3. 放行静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <!-- &lt;!&ndash; 4. 视图解析器 单前端使用的是EasyUi，所以可以不用配置 &ndash;&gt; -->
+    <!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+    <!--     <property name="prefix" value="/WEB-INF/pages"/> -->
+    <!--     <property name="suffix" value=".jsp"/> -->
+    <!-- </bean> -->
+
+<!--     文件上传 -->
+    <!--配置文件上传-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--10mb-->
+        <property name="maxUploadSize" value="10485760"></property>
+        <!--解决上传文件过程中的中文乱码问题-->
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis 全局配置 -->
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!-- &lt;!&ndash;1.      配置开发环境 &ndash;&gt; -->
+    <!-- <environments default="develop"> -->
+    <!--     <environment id="develop"> -->
+    <!--         &lt;!&ndash; 配置事务管理方式 JDBC 推荐&ndash;&gt; -->
+    <!--         <transactionManager type="JDBC"></transactionManager> -->
+    <!--         <dataSource type="POOLED"> -->
+    <!--             <property name="driver" value="com.mysql.cj.jdbc.Driver"/> -->
+    <!--             <property name="url" value="jdbc:mysql:///oadb"/> -->
+    <!--             <property name="username" value="root"/> -->
+    <!--             <property name="password" value="root123"/> -->
+    <!--         </dataSource> -->
+    <!--     </environment> -->
+    <!-- </environments> -->
+
+    <!-- &lt;!&ndash; 2. 加载mapper配置文件的位置 &ndash;&gt; -->
+    <!-- <mappers> -->
+    <!--     <mapper resource="mybatis/mapper/UserMapper.xml"/> -->
+    <!--     &lt;!&ndash; <mapper resource="mybatis/mapper/*.xml"/> &ndash;&gt; -->
+    <!-- </mappers> -->
+</configuration>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 用户表的接口文件，namespace指向接口 -->
+<mapper namespace="com.tedu.dao.UserDao">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid">
+        INSERT INTO tb_user(uname, password, nickname, createtime)
+        VALUES (#{uname}, #{password}, #{nickName}, NOW())
+    </insert>
+
+    <update id="edit" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid">
+        update tb_user
+        set uname=#{uname},
+            nickName=#{nickName},
+            password=#{password},
+            images=#{images},
+            modifyTime=now()
+        where uid = #{uid}
+    </update>
+
+    <!--     public int remove(List<Integer> list); -->
+    <update id="remove">
+        update tb_user
+        set deleted = 1
+        where uid in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!-- public List<User> findAll(); -->
+    <select id="findAll" resultMap="user">
+        SELECT * FROM tb_user
+
+        <where>
+            <if test="uname!=null and uname!=''">
+                uname like '%${uname}%'
+            </if>
+            and deleted = 0
+        </where>
+
+        limit #{page}, #{rows}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(*)
+        from tb_user
+        where deleted = 0
+    </select>
+
+
+    <select id="getUserById" resultMap="user">
+        select *
+        from tb_user
+        where uid = #{uid}
+    </select>
+
+
+    <resultMap id="user" type="com.tedu.pojo.User">
+        <id property="uid" column="uid"/>
+        <result property="uname" column="uname"/>
+        <result property="nickName" column="nickname"/>
+        <result property="password" column="password"/>
+        <result property="images" column="images"/>
+        <result property="stat" column="stat"/>
+        <result property="createTime" column="createTime"/>
+        <result property="modifyTime" column="modifyTime"/>
+        <result property="deleted" column="deleted"/>
+    </resultMap>
+
+
+</mapper>
